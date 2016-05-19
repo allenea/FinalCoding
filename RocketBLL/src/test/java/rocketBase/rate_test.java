@@ -5,17 +5,24 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import exceptions.RateException;
+import rocketData.LoanRequest;
+import rocketDomain.RateDomainModel;
 
 
 public class rate_test {
-
+	private static LoanRequest r1;
 	
 	@Before
 	public void setUp() throws Exception {
-
+		r1 = new LoanRequest();
+		r1.setiCreditScore(700);
+		r1.setdAmount(300000);
+		r1.setiTerm(30);
+		r1.setiExpenses(0);
+		r1.setiIncome(0);
 	}
+
 
 	@After
 	public void tearDown() throws Exception {
@@ -59,7 +66,6 @@ public class rate_test {
 	
 	
 	}
-
 	
 
 
