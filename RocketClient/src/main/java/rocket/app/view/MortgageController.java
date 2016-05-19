@@ -12,7 +12,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import rocket.app.MainApp;
-import rocketBase.RateBLL;
 import rocketCode.Action;
 import rocketData.LoanRequest;
 
@@ -28,10 +27,11 @@ public class MortgageController {
 	
 	@FXML
 	TextField txtHouseCost;
-	
+
 	@FXML
 	ComboBox cmbTerm;
 
+	
 	@FXML
 	Label lblMortgagePayment;
 	
@@ -52,13 +52,11 @@ public class MortgageController {
 		this.mainApp = mainApp;
 	}
 	
-	
 	@FXML
-	private void chooseTerm() {
-		ObservableList<String> comboBox = FXCollections.observableArrayList("15 Year", "30 Year");
+	private void initialize() {
+		ObservableList<String> comboBox = FXCollections.observableArrayList("15 Years", "30 Years");
 		cmbTerm.setItems(comboBox);
 	}
-	
 	//	TODO - RocketClient.RocketMainController
 	//			Call this when btnPayment is pressed, calculate the payment
 	@FXML
@@ -104,7 +102,8 @@ public class MortgageController {
 				break;
 		}
 			lq.setiTerm(pTerm);
-			
+		
+		
 		a.setLoanRequest(lq);
 			
 			//	send lq as a message to RocketHub		

@@ -11,7 +11,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root prefHeight="369.0" prefWidth="479.0" type="AnchorPane"
+<AnchorPane prefHeight="369.0" prefWidth="479.0"
 	xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="rocket.app.view.MortgageController">
 	<children>
@@ -36,10 +36,11 @@
 		</MenuBar>
 		<Separator orientation="VERTICAL" prefHeight="200.0" />
 		<Button layoutX="345.0" layoutY="311.0" mnemonicParsing="false"
-			prefHeight="44.0" prefWidth="120.0" text="Button" />
-		<TextField alignment="CENTER" layoutX="353.0" layoutY="319.0"
-			onAction="#btnCalculatePayment" prefHeight="29.0" prefWidth="105.0"
-			text="Submit" />
+			onAction="#btnCalculatePayment" prefHeight="44.0" prefWidth="120.0"
+			text="Button" />
+		<TextField alignment="CENTER" editable="false" layoutX="353.0"
+			layoutY="319.0" onAction="#btnCalculatePayment" prefHeight="29.0"
+			prefWidth="105.0" text="Submit" />
 		<SplitPane dividerPositions="0.45073375262054505" layoutX="4.0"
 			layoutY="23.0" prefHeight="289.0" prefWidth="479.0">
 			<items>
@@ -55,7 +56,7 @@
 						<Label alignment="CENTER" layoutX="11.0" layoutY="128.0"
 							prefHeight="29.0" prefWidth="196.0" text="Expenses"
 							textAlignment="CENTER" />
-						<Label alignment="CENTER" layoutX="16.0" layoutY="163.0"
+						<Label alignment="CENTER" layoutX="11.0" layoutY="244.0"
 							prefHeight="29.0" prefWidth="190.0" text="Monthly Payment" />
 					</children>
 				</AnchorPane>
@@ -70,13 +71,13 @@
 							prefHeight="27.0" prefWidth="211.0" />
 						<TextField fx:id="txtExpenses" layoutX="31.0" layoutY="123.0"
 							prefHeight="27.0" prefWidth="211.0" />
-						<ComboBox fx:id="cmbTerm" layoutX="31.0" layoutY="209.0"
-							onAction="#chooseTerm" prefWidth="150.0" />
-						<Label fx:id="lblMortgagePayment" layoutX="31.0" layoutY="162.0"
+						<Label fx:id="lblMortgagePayment" layoutX="24.0" layoutY="246.0"
 							prefHeight="27.0" prefWidth="211.0" />
+						<ComboBox fx:id="cmbTerm" layoutX="94.0" layoutY="156.0"
+							onAction="#initialize" prefWidth="150.0" promptText="Term" />
 					</children>
 				</AnchorPane>
 			</items>
 		</SplitPane>
 	</children>
-</fx:root>
+</AnchorPane>

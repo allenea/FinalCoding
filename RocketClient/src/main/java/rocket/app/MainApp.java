@@ -1,27 +1,13 @@
 package rocket.app;
 
 import java.io.IOException;
-import java.io.Serializable;
-import java.io.StringWriter;
-import java.util.function.Consumer;
-
-import javax.swing.SwingUtilities;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -96,9 +82,7 @@ public class MainApp extends Application {
 		try {
 			// Load person overview.
 			FXMLLoader loader = new FXMLLoader();
-			//loader.setRoot(rClient);
-
-			loader.setLocation(MainApp.class.getResource("view/Mortgage.fxml"));
+			loader.setLocation(MainApp.class.getResource("view/MortgageController.fxml"));
 			AnchorPane RocketMain = (AnchorPane) loader.load();
 
 			Scene scene = new Scene(RocketMain);
