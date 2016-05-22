@@ -128,7 +128,10 @@ public class MortgageController {
 			//Double.toString(double)
 			lblMortgagePayment.setText(mPay);
 			}
+		else{
+			lblMortgagePayment.setText("You Cannot Afford This House");
 
+		}
 		
 		//	TODO - RocketClient.HandleLoanRequestDetails
 		//			lRequest is an instance of LoanRequest.
