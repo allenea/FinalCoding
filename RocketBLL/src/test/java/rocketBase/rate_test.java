@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 import exceptions.RateException;
 import rocketData.LoanRequest;
-import rocketDomain.RateDomainModel;
 
 
 public class rate_test {

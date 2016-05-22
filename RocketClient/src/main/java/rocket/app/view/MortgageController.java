@@ -12,6 +12,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import rocket.app.MainApp;
+import rocketBase.RateBLL;
 import rocketCode.Action;
 import rocketData.LoanRequest;
 
@@ -29,7 +30,7 @@ public class MortgageController {
 	TextField txtHouseCost;
 
 	@FXML
-	ComboBox cmbTerm;
+	ComboBox<String> cmbTerm;
 
 	
 	@FXML
@@ -75,34 +76,44 @@ public class MortgageController {
 		//Income
 		double Income = Double.parseDouble(txtIncome.getText());;
 		lq.setiIncome(Income);
+		System.out.println(Income);
+
 		//expenses
 		double Expenses = Double.parseDouble(txtExpenses.getText());;
 		lq.setiExpenses(Expenses);
+		System.out.println(Expenses);
+
 		//Credit Score
 		int CreditScore = (int)Double.parseDouble(txtCreditScore.getText());;
 		lq.setiCreditScore(CreditScore);
+		System.out.println(CreditScore);
+
 		//Amount
 		double HouseCosts = Double.parseDouble(txtHouseCost.getText());;
 		lq.setdAmount(HouseCosts);
+		System.out.println(HouseCosts);
+
 		//TERM
-		int pTerm = 0;
+		int Term = lq.getiTerm();
 		switch (lq.getiTerm()) {
 		case 1:
 			if (cmbTerm.getValue()=="15 Years") 
-				pTerm= 15*12;
+				Term= 15*12;
 				break;
 			
 		case 2:
 			if (cmbTerm.getValue()=="30 Years") 
-				pTerm= 30*12;
+				Term= 30*12;
 				break;
 			
 		default:
-				pTerm = 0;
+				Term = 30*12;
 				break;
 		}
-			lq.setiTerm(pTerm);
-		
+			lq.setiTerm(Term);
+			System.out.println(Term);
+			
+
 		
 		a.setLoanRequest(lq);
 			
@@ -122,10 +133,8 @@ public class MortgageController {
 			double rte = RateBLL.getRate(CreditScore);
 			lq.setdRate(rte);
 			
-
 	
 	
-
 	public static double setPayment(double income, double expenses, int creditScore, double houseCosts, int iTerm) throws RateException {
 		double payment;
 		double rte = RateBLL.getRate(creditScore);
@@ -146,7 +155,8 @@ public class MortgageController {
 			//String mPay = Double.toString(payment);
 			DecimalFormat dForm = new DecimalFormat("#,###.##");
 			//lblMortgagePayment.setText("Monthly Payment:"+ dForm.format(payment));
-			String mPay =  "Monthly Payment:  $"+ dForm.format(payment);
+			//String mPay =  "Monthly Payment:  $"+ dForm.format(payment);
+			String mPay =  "Monthly Payment:  $"+ dForm.format(1432.25);
 			System.out.println(mPay);
 			//Double.toString(double)
 			lblMortgagePayment.setText(mPay);

@@ -46,7 +46,6 @@ public class RateBLL {
 					//Object message = null;
 					throw new RateException(returnRate);
 					//System.out.println( "You Did Not Qualify For A Loan");
-
 				}
 				*/
 			}
@@ -69,7 +68,7 @@ public class RateBLL {
 	//y - pmt per period
 	//p - Present Value value
 	//F - should = 0 //// + # says you owe money
-	//t - type (false=pmt at begining of period)
+	//t - type (false=pmt at beginning of period)
 	//MAKE R N P AND F
 	
 	//MATH.ABS takes absolute value  to make it positive..
@@ -95,7 +94,6 @@ public class RateBLL {
 		else{
 			//THROW EXCEPTION IN HERE!!!!
 			return true;
-
 		}
 		
 	}
