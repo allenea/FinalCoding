@@ -27,28 +27,19 @@ public class RocketHub extends Hub {
 			
 			//	TODO - RocketHub.messageReceived
 			
-			//Downpayment
+			//Down payment
 			double payment = 0;
-					//setPayment(lq.getiIncome(), lq.getiExpenses(), lq.getiCreditScore(), lq.getdAmount(), lq.getiTerm());
-			
-			// double dRate;
-			double rte = 0;
+			double rate = 0;
 			try {
-				rte = RateBLL.getRate(lq.getiCreditScore());
-			} catch (RateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			lq.setdRate(rte);
-			
-			try {
+				rate = RateBLL.getRate(lq.getiCreditScore());
 				payment = RateBLL.getPayment(lq.getiCreditScore(), lq.getiTerm(), lq.getdAmount(), 0, false);
 			} catch (RateException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			lq.setdPayment(payment);
-			
+			lq.setdRate(rate);
+
 			//	You will have to:
 			//	Determine the rate with the given credit score (call RateBLL.getRate)
 			//		If exception, show error message, stop processing

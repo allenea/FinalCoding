@@ -12,7 +12,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import rocket.app.MainApp;
-import rocketBase.RateBLL;
 import rocketCode.Action;
 import rocketData.LoanRequest;
 
@@ -94,24 +93,17 @@ public class MortgageController {
 		System.out.println(HouseCosts);
 
 		//TERM
-		int Term = lq.getiTerm();
-		switch (lq.getiTerm()) {
-		case 1:
-			if (cmbTerm.getValue()=="15 Years") 
-				Term= 15*12;
-				break;
-			
-		case 2:
-			if (cmbTerm.getValue()=="30 Years") 
-				Term= 30*12;
-				break;
-			
-		default:
-				Term = 30*12;
-				break;
+		int Term = 0;
+		if (cmbTerm.getValue()=="15 Years") {
+			Term= 15*12;
 		}
-			lq.setiTerm(Term);
-			System.out.println(Term);
+		//else (cmbTerm.getValue()=="30 Years") {
+		else{
+			Term= 30*12;
+		}
+			
+		lq.setiTerm(Term);
+		System.out.println(Term);
 			
 
 		
@@ -121,50 +113,22 @@ public class MortgageController {
 		mainApp.messageSend(lq);
 	}
 
-		/*	
-			//RATE, dPayment and DownPayment?????????????????????????
-			//private int iDownPayment;
-		
-			//Downpayment
-			double mPayment = setPayment(Income, Expenses, CreditScore, HouseCosts, pTerm);
-			lq.setdPayment(mPayment);
-			
-			// double dRate;
-			double rte = RateBLL.getRate(CreditScore);
-			lq.setdRate(rte);
-			
-	
-	
-	public static double setPayment(double income, double expenses, int creditScore, double houseCosts, int iTerm) throws RateException {
-		double payment;
-		double rte = RateBLL.getRate(creditScore);
-		
-		payment = RateBLL.getPayment(rte, iTerm, houseCosts, 0, false);
-		return payment;
-		
-	}*/
-
-	
-
-
 	@FXML
-	public void HandleLoanRequestDetails(LoanRequest lRequest) throws Exception{
+	public void HandleLoanRequestDetails(LoanRequest lRequest) {
 		double payment;
 		payment = lRequest.getdPayment();
-		if (payment<= 0.36*(lRequest.getiIncome()/12) && payment <= 0.28*(lRequest.getiIncome()/12 - lRequest.getiExpenses())) {
-			//String mPay = Double.toString(payment);
+
+		double x1 = (0.28*lRequest.getiIncome()/12);
+		double x2 = (0.36*lRequest.getiIncome()/12) - lRequest.getiExpenses();
+		if (payment >=x1 & payment >= x2){
+			
 			DecimalFormat dForm = new DecimalFormat("#,###.##");
-			//lblMortgagePayment.setText("Monthly Payment:"+ dForm.format(payment));
-			//String mPay =  "Monthly Payment:  $"+ dForm.format(payment);
-			String mPay =  "Monthly Payment:  $"+ dForm.format(1432.25);
+			String mPay =  "Monthly Payment:  $"+ dForm.format(payment);
 			System.out.println(mPay);
 			//Double.toString(double)
 			lblMortgagePayment.setText(mPay);
-		}
-		else {
-				throw new RateException();
 			}
-		
+
 		
 		//	TODO - RocketClient.HandleLoanRequestDetails
 		//			lRequest is an instance of LoanRequest.
@@ -172,6 +136,5 @@ public class MortgageController {
 		//			should be calculated.
 		//			Display dPayment on the form, rounded to two decimal places
 		//return mPay;
-		
-	}
+	}	
 }

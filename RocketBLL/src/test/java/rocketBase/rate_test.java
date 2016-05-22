@@ -5,12 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import exceptions.RateException;
-import rocketData.LoanRequest;
 
 
 public class rate_test {
-	private static LoanRequest r1;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -37,6 +36,11 @@ public class rate_test {
 		assertTrue(RateBLL.getRate(750) == 3.75);
 		assertTrue(RateBLL.getRate(800) == 3.5);
 		
+	} catch (RateException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		System.err.println("You Do Not Qualify For A Loan");
+	}
 
 		//TODO - RocketBLL rate_test
 		//		Check to see if a RateException is thrown if there are no rates for a given
@@ -44,38 +48,41 @@ public class rate_test {
 		
 		
 		
-		
-		//SEE IF EXCEPTION IS HANDLED WHEN AN UNACCEPTED INTEREST RATE IS GIVEN
-		assertFalse(RateBLL.getRate(300)== 2.5);
-		assertTrue(RateBLL.getRate(800) == 3.5);
-		assertFalse(RateBLL.getRate(0)== 0);
-		
-	} catch (RateException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		System.err.println("You Do Not Qualify For A Loan");
-	}
+
 
 
 
 	
 	}
+	//@Test(expected=InsufficientF//undsException./cl//ass)
+	@Test(expected = RateException.class)
+	public void RateExceptionTest() throws RateException{
+		double rate = RateBLL.getRate(300);
+		//SEE IF EXCEPTION IS HANDLED WHEN AN UNACCEPTED INTEREST RATE IS GIVEN
+		assertTrue(rate == 2.5);
+		assertTrue(RateBLL.getRate(0)== 0);
+	}
 
 	@Test
 	public void testPayment(){
-		r1 = new LoanRequest();
-		r1.setiCreditScore(700);
-		r1.setdAmount(300000);
-		r1.setiTerm(30);
-		r1.setiExpenses(0);
-		r1.setiIncome(0);
-		
+		//r1 = new LoanRequest();
+		//r1.setiCreditScore(700);
+		//r1.setdAmount(300000);
+		//r1.setiTerm(30);
+		//r1.setiExpenses(0);
+		//r1.setiIncome(0);
+		double test1 = 0;
 		try {
-			assertTrue(RateBLL.getPayment(700, 30, 300000, 0, true)== 1432.25);
-		} catch (RateException e) {
+			test1 = RateBLL.getPayment(700, 30, 300000, 0, false);
+		} 
+		
+		
+		catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
+		assertEquals("$1432.25",(long)test1,(long)1432.25);
+
 	}
 	
 

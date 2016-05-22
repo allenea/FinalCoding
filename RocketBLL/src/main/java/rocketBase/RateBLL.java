@@ -29,17 +29,19 @@ public class RateBLL {
 		//			obviously this should be changed to return the determined rate
 
 		ArrayList<RateDomainModel> rates = new ArrayList<RateDomainModel>(RateDAL.getAllRates());
-		double returnRate = 0;
+		RateDomainModel r1 = new RateDomainModel();
+		double Rate = 0;
 		//FOR
 		for (RateDomainModel rate: rates)
 		{
 			//If
 			if (GivenCreditScore >= rate.getiMinCreditScore()){
-				returnRate = rate.getdInterestRate();
+				r1 = rate;
+				Rate = rate.getdInterestRate();
 					}
-
-			else{
-				throw new RateException();
+		}
+		if(Rate == 0){
+			throw new RateException(r1);
 				
 			/*{
 				if(GivenCreditScore < rate.getiMinCreditScore()){
@@ -49,9 +51,8 @@ public class RateBLL {
 				}
 				*/
 			}
-			continue;
-		}
-		return returnRate;
+
+		return Rate;
 
 	}
 	
@@ -73,30 +74,18 @@ public class RateBLL {
 	
 	//MATH.ABS takes absolute value  to make it positive..
 	
-	public static double getPayment(int CreditScore, double term, double payment, double fv, boolean t) throws RateException
+	public static double getPayment(int CreditScore, double term, double payment, double fv, boolean t) throws RateException 
 	{		
+
+		//Makes monthly interest rate = IR/12
 		double InterestRate = getRate((int) CreditScore)/1200;
+		double Term = (term *12);
 		double FutureValue = 0;
-		boolean Compounding = true;
-		
-		double PresentValue = FinanceLib.pv(InterestRate, term, payment, FutureValue, Compounding);
-		double mPayment = Math.abs(FinanceLib.pmt(InterestRate, term, PresentValue, FutureValue, Compounding));
-		return mPayment;
+		//create the Present Value??????? or is that just payment
+		double mPayment = Math.abs(FinanceLib.pmt(InterestRate, Term, payment, FutureValue, t));
+		return mPayment; 
 	}
-	/*
-	public boolean RateApproval(double mPayment,double iIncome,double iExpenses){
-		if (mPayment > iIncome * 0.36){
-			return false;
-		}
-		else if(mPayment > (iIncome+iExpenses) * 0.28){
-			return false;
-		}
-		else{
-			//THROW EXCEPTION IN HERE!!!!
-			return true;
-		}
-		
-	}
-	*/
+
+
 	
 }
