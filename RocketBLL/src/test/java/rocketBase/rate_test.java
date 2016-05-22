@@ -72,8 +72,11 @@ public class rate_test {
 		//r1.setiExpenses(0);
 		//r1.setiIncome(0);
 		double test1 = 0;
+		double test2 = 0;
 		try {
 			test1 = RateBLL.getPayment(700, 30, 300000, 0, false);
+			test2 = RateBLL.getPayment(650, 15, 456782, 0, false);
+
 		} 
 		
 		
@@ -82,7 +85,8 @@ public class rate_test {
 			//e.printStackTrace();
 		}
 		assertEquals("$1432.25",(long)test1,(long)1432.25);
-
+		assertEquals("$3494.35",(long)test2,(long)3494.35);
+		
 	}
 	
 

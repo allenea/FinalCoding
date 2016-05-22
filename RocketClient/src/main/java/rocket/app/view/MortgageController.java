@@ -95,11 +95,11 @@ public class MortgageController {
 		//TERM
 		int Term = 0;
 		if (cmbTerm.getValue()=="15 Years") {
-			Term= 15*12;
+			Term= 15;
 		}
 		//else (cmbTerm.getValue()=="30 Years") {
 		else{
-			Term= 30*12;
+			Term= 30;
 		}
 			
 		lq.setiTerm(Term);
