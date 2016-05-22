@@ -28,7 +28,7 @@ public class RocketHub extends Hub {
 			//	TODO - RocketHub.messageReceived
 			
 			//Downpayment
-			double payment;
+			double payment = 0;
 					//setPayment(lq.getiIncome(), lq.getiExpenses(), lq.getiCreditScore(), lq.getdAmount(), lq.getiTerm());
 			
 			// double dRate;
@@ -41,7 +41,12 @@ public class RocketHub extends Hub {
 			}
 			lq.setdRate(rte);
 			
-			payment = RateBLL.getPayment(rte, lq.getiTerm(), lq.getdAmount(), 0, false);
+			try {
+				payment = RateBLL.getPayment(lq.getiCreditScore(), lq.getiTerm(), lq.getdAmount(), 0, false);
+			} catch (RateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			lq.setdPayment(payment);
 			
 			//	You will have to:

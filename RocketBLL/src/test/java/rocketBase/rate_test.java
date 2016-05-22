@@ -15,12 +15,7 @@ public class rate_test {
 	
 	@Before
 	public void setUp() throws Exception {
-		r1 = new LoanRequest();
-		r1.setiCreditScore(700);
-		r1.setdAmount(300000);
-		r1.setiTerm(30);
-		r1.setiExpenses(0);
-		r1.setiIncome(0);
+
 	}
 
 
@@ -43,7 +38,7 @@ public class rate_test {
 		assertTrue(RateBLL.getRate(750) == 3.75);
 		assertTrue(RateBLL.getRate(800) == 3.5);
 		
-		
+
 		//TODO - RocketBLL rate_test
 		//		Check to see if a RateException is thrown if there are no rates for a given
 		//		credit score
@@ -52,9 +47,9 @@ public class rate_test {
 		
 		
 		//SEE IF EXCEPTION IS HANDLED WHEN AN UNACCEPTED INTEREST RATE IS GIVEN
-		assertTrue(RateBLL.getRate(300)== 2.5);
+		assertFalse(RateBLL.getRate(300)== 2.5);
 		assertTrue(RateBLL.getRate(800) == 3.5);
-		assertTrue(RateBLL.getRate(0)== 0);
+		assertFalse(RateBLL.getRate(0)== 0);
 		
 	} catch (RateException e) {
 		// TODO Auto-generated catch block
@@ -63,8 +58,25 @@ public class rate_test {
 	}
 
 
+
 	
-	
+	}
+
+	@Test
+	public void testPayment(){
+		r1 = new LoanRequest();
+		r1.setiCreditScore(700);
+		r1.setdAmount(300000);
+		r1.setiTerm(30);
+		r1.setiExpenses(0);
+		r1.setiIncome(0);
+		
+		try {
+			assertTrue(RateBLL.getPayment(700, 30, 300000, 0, true)== 1432.25);
+		} catch (RateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 

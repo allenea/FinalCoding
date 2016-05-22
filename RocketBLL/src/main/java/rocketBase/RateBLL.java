@@ -74,11 +74,14 @@ public class RateBLL {
 	
 	//MATH.ABS takes absolute value  to make it positive..
 	
-	public static double getPayment(double r, double n, double p, double f, boolean t)
+	public static double getPayment(int CreditScore, double term, double payment, double fv, boolean t) throws RateException
 	{		
-		double mPayment;
-		double rate1 = r/1200;
-		mPayment = Math.abs(FinanceLib.pmt(rate1, n, p, 0, false));
+		double InterestRate = getRate((int) CreditScore)/1200;
+		double FutureValue = 0;
+		boolean Compounding = true;
+		
+		double PresentValue = FinanceLib.pv(InterestRate, term, payment, FutureValue, Compounding);
+		double mPayment = Math.abs(FinanceLib.pmt(InterestRate, term, PresentValue, FutureValue, Compounding));
 		return mPayment;
 	}
 	/*

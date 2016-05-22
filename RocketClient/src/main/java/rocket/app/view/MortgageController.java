@@ -142,12 +142,14 @@ public class MortgageController {
 	public void HandleLoanRequestDetails(LoanRequest lRequest) throws Exception{
 		double payment;
 		payment = lRequest.getdPayment();
-
 		if (payment<= 0.36*(lRequest.getiIncome()/12) && payment <= 0.28*(lRequest.getiIncome()/12 - lRequest.getiExpenses())) {
-			DecimalFormat dForm = new DecimalFormat("%.2f");
-			lblMortgagePayment.setText("Monthly Payment:"+ dForm.format(payment));
-
-
+			//String mPay = Double.toString(payment);
+			DecimalFormat dForm = new DecimalFormat("#,###.##");
+			//lblMortgagePayment.setText("Monthly Payment:"+ dForm.format(payment));
+			String mPay =  "Monthly Payment:  $"+ dForm.format(payment);
+			System.out.println(mPay);
+			//Double.toString(double)
+			lblMortgagePayment.setText(mPay);
 		}
 		else {
 				throw new RateException();
@@ -159,6 +161,7 @@ public class MortgageController {
 		//			after it's returned back from the server, the payment (dPayment)
 		//			should be calculated.
 		//			Display dPayment on the form, rounded to two decimal places
+		//return mPay;
 		
 	}
 }
